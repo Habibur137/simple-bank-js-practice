@@ -22,3 +22,11 @@ function getInput(input){
     getInputElement.value = '';
     return getInputValue;
 }
+
+//set input function for deposit and withdraw
+function setInput(depositAmount, container){
+    const depositContainer = document.getElementById(container)
+    const previousDepositAmount = parseFloat(depositContainer.innerText);
+    const totalAmount = previousDepositAmount + depositAmount;
+    depositContainer.innerText = totalAmount;
+}
