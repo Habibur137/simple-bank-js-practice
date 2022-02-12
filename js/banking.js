@@ -1,18 +1,22 @@
 document.getElementById('deposit-button').addEventListener('click', function(){
     //take input value from input field
     const depositAmount = getInput('deposit-input')
-    // set amount to the deposit container
-    setInput(depositAmount, 'deposit-container')
-    /* const depositContainer = document.getElementById('deposit-container')
-    const previousDepositAmount = parseFloat(depositContainer.innerText);
-    const totalAmount = previousDepositAmount + depositAmount;
-    depositContainer.innerText = totalAmount; */
+    if(depositAmount > 0){
+         // set amount to the deposit container
+        setInput(depositAmount, 'deposit-container')
+        // balance update for deposit 
+        balanceUpdate(depositAmount, true)
+    }
 })
 document.getElementById('withdraw-button').addEventListener('click', function(){
     //take input value from input field
     const withdrawAmount = getInput('withdraw-input')
-    // set amount to the deposit container
-    setInput(withdrawAmount, 'withdraw-container')
+    if(withdrawAmount > 0){
+        // set amount to the deposit container
+        setInput(withdrawAmount, 'withdraw-container')
+        // balance update for withdraw
+        balanceUpdate(withdrawAmount, false)
+    }
 })
 
 //get input function for deposit and withdraw
@@ -24,9 +28,22 @@ function getInput(input){
 }
 
 //set input function for deposit and withdraw
-function setInput(depositAmount, container){
-    const depositContainer = document.getElementById(container)
-    const previousDepositAmount = parseFloat(depositContainer.innerText);
-    const totalAmount = previousDepositAmount + depositAmount;
-    depositContainer.innerText = totalAmount;
+function setInput(inputAmount, container){
+    const amountContainer = document.getElementById(container)
+    const previousAmount = parseFloat(amountContainer.innerText);
+    const totalAmount = previousAmount + inputAmount;
+    amountContainer.innerText = totalAmount;
+}
+
+// balance update for deposit and withdraw
+function balanceUpdate(inputAmount, isAddition){
+    const balanceContainer = document.getElementById('balance-container');
+    const previousBalance = parseFloat(balanceContainer.innerText)
+    if(isAddition == true){
+        const totalBalance = previousBalance + inputAmount;
+        balanceContainer.innerText = totalBalance;
+    }else{
+        const totalBalance = previousBalance - inputAmount;
+        balanceContainer.innerText = totalBalance;
+    }
 }
