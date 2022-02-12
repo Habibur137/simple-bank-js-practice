@@ -11,13 +11,20 @@ document.getElementById('deposit-button').addEventListener('click', function(){
 document.getElementById('withdraw-button').addEventListener('click', function(){
     //take input value from input field
     const withdrawAmount = getInput('withdraw-input')
-    if(withdrawAmount > 0){
+    const currentBalance = getCurrentBalance()
+    if(withdrawAmount > 0 && withdrawAmount < currentBalance){
         // set amount to the deposit container
         setInput(withdrawAmount, 'withdraw-container')
         // balance update for withdraw
         balanceUpdate(withdrawAmount, false)
     }
 })
+
+function getCurrentBalance(){
+    const balanceContainer = document.getElementById('balance-container');
+    const previousBalance = parseFloat(balanceContainer.innerText)
+    return previousBalance;
+}
 
 //get input function for deposit and withdraw
 function getInput(input){
